@@ -21,15 +21,25 @@ This repository contains lessons and projects focused on AI agents using various
 
 ## About Lessons
 Lesson 1: Basic LLM Inference with Mistral
+
 Lesson 2: Llama Model Examples (~1.4MB notebook)
+
 Lesson 3: Simple Agents with LangChain
+
 Lesson 4: MCP Tools Integration
+
 Lesson 5: Memory & Guardrails for Agents
+
 Lesson 6: Multi-Agent Systems with Critic & Coordinator
+
 Lesson 7: Agent Answer Scoring
+
 Lesson 8: Different RAG Techniques
+
 Lesson 9: DSPy Components
+
 Lesson 10: TAO (Think-Action-Observation) Techniques with Mistral
+
 
 ## Contribution
 Guidelines for contributing to the repository, including coding standards and code review processes.
