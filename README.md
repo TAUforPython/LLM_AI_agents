@@ -3,142 +3,118 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Jupyter Notebook](https://img.shields.io/badge/Jupyter-Notebook-orange)](https://jupyter.org/)
 
-This repository is a structured, hands-on course for building **production-ready AI agents**. It moves from basic LLM inference to advanced techniques like **Multi-Agent coordination**, **MCP tools integration**, **HyDE retrieval**, and **DSPy components** — all with a focus on the **Mistral API** and practical healthcare-focused examples (e.g., clinical guideline verification).
+A compact, hands-on course and reference for building LLM-powered AI agents — from single-step inference to multi-agent coordination, tool integration (MCP), and retrieval-augmented pipelines (HyDE).
 
-## What You'll Learn
+This repository is organized as executable Jupyter notebooks that demonstrate patterns, example code, and experiments. Notebooks target both local inference (Mistral / local LLMs) and cloud APIs (Mistral cloud, OpenAI).
 
-| Lesson | Topic | Key Technique / Tool |
+## What you'll learn
+
+| Lesson | Topic | Key technique / tool |
 |--------|-------|----------------------|
 | 1-2 | Basic & Llama inference | Mistral, OpenAI, Llama |
-| 3 | Simple agents | LangChain |
-| 4 | **MCP Tools** | Model Context Protocol |
+| 3 / 3A | Simple agents & MCP emulation | LangChain, MCP examples |
+| 4 | MCP Tools | Model Context Protocol (tool wrapping, tool loop) |
 | 5 | Memory & Guardrails | Conversation buffers, content safety |
-| 6 | **Multi-Agent** | Critic + Coordinator pattern |
+| 6 | Multi-Agent | Critic + Coordinator pattern |
 | 7 | Answer scoring | Automated evaluation metrics |
-| 8 | **RAG techniques** | Naive, advanced, and query transformations |
-| 9 | **DSPy components** | Programmatic LM pipelines |
-| 10 | **TAO** (Think-Act-Observe) | ReAct-like loop with Mistral |
-| 11-13 | Applied projects | Medical claims, fact-checking, **HyDE** for clinical guidelines |
+| 8 | RAG techniques | Naive, advanced, and query transformations |
+| 9 | DSPy components | Programmatic LM pipelines (DSPy) |
+| 10 | TAO (Think-Act-Observe) | ReAct-like loop with LLM + tools |
+| 11-13 | Applied projects | Medical claims, fact-checking, HyDE for clinical guidelines |
 
-> All notebooks are fully executable and include API setup instructions (Mistral / OpenAI).
+> All notebooks are executable. Many include Colab launch badges (open in Colab) and API setup notes.
 
-## Core Theoretical Concepts
+## Key concepts covered
 
-### 1. Large Language Models (LLMs) as Agent Brains
-LLMs (like Mistral, Llama, GPT) act as the reasoning engine of an agent. They don't just generate text — they:
-- **Plan** (break down goals into steps)
-- **Use tools** (via API calls)
-- **Reflect** (evaluate their own outputs)
-- **Remember** (short-term and long-term memory)
+- MCP (Model Context Protocol): standardized tool and resource descriptions so an LLM can call external capabilities safely and consistently (see lesson-4_MCP_tools.ipynb).
+- HyDE (Hypothetical Document Embeddings): generate a hypothetical answer to form better retrieval queries (see lesson-13_HyDE_Russian_Clinical_Guidelines.ipynb).
+- Agent Patterns: TAO / ReAct loops, single-agent with guardrails + memory, and explicit multi-agent patterns (coordinator, critic, workers).
 
-In this repo, you'll see how to switch between different LLM providers and how to control their “temperature,” system prompts, and structured outputs.
-
-### 2. MCP – Model Context Protocol  
-**MCP** (Model Context Protocol) is a standardized way to give LLMs **live access to external tools and data sources**. Instead of hard-coding each API, MCP defines:
-- **Resources** (files, databases, web APIs)
-- **Tools** (functions the LLM can call)
-- **Prompts** (reusable templates)
-
-**Why it matters:**  
-Without MCP, an agent is a static text generator. With MCP, it can query a database, call a calculator, fetch a webpage, or send an email — all using a consistent interface.  
-*Lesson 4 (`lesson-4_MCP_tools.ipynb`) demonstrates MCP integration with Mistral.*
-
-### 3. HyDE – Hypothetical Document Embeddings  
-**HyDE** is a retrieval technique that solves a common RAG problem: the user’s query might not match the wording of relevant documents.
-
-**How it works:**
-1. Given a user query, ask the LLM to **generate a hypothetical answer** (even if wrong).
-2. Embed that **hypothetical answer**, not the original query.
-3. Use that embedding to retrieve real documents.
-
-**Why it works:**  
-The hypothetical answer is semantically closer to actual relevant documents than the original short query is.  
-*See `lesson-13_HyDE_Russian_Clinical_Guidelines.ipynb` for a real application with medical guidelines.*
-
-### 4. Agent Architecture – From Simple to Multi-Agent
-
-This repo evolved through several architectural patterns:
-
-#### A. Basic ReAct (TAO – Think, Act, Observe)
-- **Think**: LLM decides next action
-- **Act**: Execute tool / API call
-- **Observe**: Feed result back to LLM  
-*(Lesson 10)*
-
-#### B. Single Agent with Memory & Guardrails
-- Short-term memory (conversation buffer)
-- Long-term memory (vector store)
-- Guardrails (block unsafe outputs, limit loops)  
-*(Lesson 5)*
-
-#### C. Multi-Agent Systems (Critic + Coordinator)
-Instead of one LLM doing everything, you have:
-- **Coordinator Agent**: Breaks down the task, delegates
-- **Critic Agent**: Checks the work of other agents for errors, consistency, or bias
-- **Worker Agents**: Execute subtasks
-
-This pattern improves reliability, especially in high-stakes domains like medical claim verification or clinical fact-checking.  
-*(Lessons 6, 11, 12)*
-
-## Repository Structure
+## Repository contents (top-level)
 
 ```
-LLM_AI_agents/
-├── lesson-1_LLM_base_inference.ipynb      # Mistral & OpenAI setup
-├── lesson-2_Llama_example_inference.ipynb
-├── lesson-3_simple_agent_Langchain.ipynb
-├── lesson-4_MCP_tools.ipynb               # Model Context Protocol
-├── lesson-5_Memory_and_Guardrails_Agents.ipynb
-├── lesson-6_MultyAgent_Critical_and_Coordinator.ipynb
-├── lesson-7_Score_Agent_Answer.ipynb
-├── lesson-8_Different_RAG_techniques.ipynb
-├── lesson-9_DSPy_components.ipynb
-├── lesson-10_TAO_think_act_observe_techniques.ipynb
-├── lesson-11_LLM_Agent_Graph_Verdict_Medical_Claims.ipynb
-├── lesson-12_AI_agent_fact_cheking_Digital_Clinical_Requirements.ipynb
-├── lesson-13_HyDE_Russian_Clinical_Guidelines.ipynb
-├── README.md
-└── LICENSE
+LICENSE
+README.md
+canonical-example-Get-started-managed-agents.ipynb  # runnable example (managed agents)
+lesson-1_LLM_base_inference.ipynb
+lesson-2_Llama_example_inference.ipynb
+lesson-3_simple_agent_Langchain.ipynb
+lesson-3A_MCP_example_emulation.ipynb
+lesson-4_MCP_tools.ipynb
+lesson-5_Memory_and_Guardrails_Agents.ipynb
+lesson-6_MultyAgent_Critical_and_Coordinator.ipynb
+lesson-7_Score_Agent_Answer.ipynb
+lesson-8_Different_RAG_techniques.ipynb
+lesson-9_DSPy_components.ipynb
+lesson-10_TAO_think_act_observe_techniques.ipynb
+lesson-11_LLM_Agent_Graph_Verdict_Medical_Claims.ipynb
+lesson-12_AI_agent_fact_cheking_Digital_Clinical_Requirements.ipynb
+lesson-13_HyDE_Russian_Clinical_Guidelines.ipynb
 ```
 
-##  Quick Start
+Notes:
+- The repository is notebook-first: there is no top-level package or service. Notebooks are the primary artifacts.
+- Filenames may include small spelling variants (e.g., `MultyAgent` in lesson-6); filenames reflect the committed names.
 
-1. **Clone the repo** or make Fork
-   ```bash
-   git clone https://github.com/D2718281828nis/LLM_AI_agents.git
-   cd LLM_AI_agents
-   ```
+## How it fits together
 
-2. **Set up environment**  
-   Create a virtual environment and install:
-   ```bash
-   pip install mistralai langchain openai dspy chromadb jupyter
-   ```
+Each lesson is an independent notebook that can be run in order to follow a learning path. Early lessons demonstrate inference and basic usage (Mistral, OpenAI), mid lessons introduce tools and agent loops (MCP, LangChain, LangGraph), and later lessons apply multi-agent patterns and retrieval techniques to domain problems (medical claims, HyDE retrieval).
 
-3. **Add your API keys**  
-   Create a `.env` file or set environment variables:
-   ```text
-   MISTRAL_API_KEY=your_key_here
-   OPENAI_API_KEY=your_key_here   (if using OpenAI)
-   ```
+## Quick start
 
-4. **Run the notebooks** in order, starting with `lesson-1_LLM_base_inference.ipynb`.
+Minimum recommended environment:
+- Python 3.10+ (3.11 tested)
+- A recent pip
+
+From a fresh clone:
+
+```bash
+git clone https://github.com/D2718281828nis/LLM_AI_agents.git
+cd LLM_AI_agents
+python -m venv .venv
+source .venv/bin/activate     # Windows: .venv\Scripts\activate
+pip install --upgrade pip
+
+# install the common dependencies used by the notebooks (some notebooks install extras inline)
+pip install mistralai langchain openai dspy chromadb jupyter colab
+```
+
+Environment / secrets (examples used in notebooks):
+
+```text
+MISTRAL_API_KEY=your_mistral_api_key
+OPENAI_API_KEY=your_openai_api_key
+```
+
+Running notebooks:
+- Open in Jupyter Lab/Notebook: `jupyter notebook` or `jupyter lab` and open the notebook you want to run.
+- Many notebooks include a Colab launch badge; you can open them in Google Colab and provide secrets via the Colab secrets/userdata UI.
+
+Run a single notebook headlessly (example):
+
+```bash
+jupyter nbconvert --to notebook --execute lesson-4_MCP_tools.ipynb --ExecutePreprocessor.timeout=600
+```
+
+## What I reviewed (repository analysis)
+
+I inspected the README and representative notebooks (lesson-1_LLM_base_inference.ipynb and lesson-4_MCP_tools.ipynb) to confirm the examples and CLI/API usage. Lesson-4 demonstrates an explicit tool loop, tool wrapping, and integrations with LangChain / LangGraph. Lesson-1 shows Mistral and OpenAI inference examples and includes a short hallucinatory-output warning for medical usage.
+
+If you'd like, I can:
+- Add a requirements.txt with pinned versions based on notebook inline installs.
+- Add Colab badges to any notebooks that are missing them.
+- Rename files to fix small spelling inconsistencies (e.g., `MultyAgent` → `MultiAgent`) and open a PR with those changes.
 
 ## Contributing
 
-Contributions are welcome! Please follow:
-- **Coding standards**: Keep notebooks clean, add comments for key steps.
-- **Process**: Open an issue first for major changes, then submit a PR.
-- **New lessons**: Should include a practical use case and theory explanation.
-
+Please open an issue for major changes before submitting a PR. When adding lessons, include: problem statement, practical demo notebook, and short theory notes.
 
 ## Acknowledgements
 
-- Built with [Mistral AI](https://mistral.ai/) and [LangChain](https://www.langchain.com/)
-- HyDE inspired by Gao et al. (2022) – "Precise Zero-Shot Dense Retrieval without Relevance Labels"
+- Built with Mistral AI and LangChain examples
+- HyDE inspired by Gao et al. (2022)
 - MCP based on Anthropic’s Model Context Protocol specification
 
 ---
 
-**Start with Lesson 1 → then jump to Lesson 4 (MCP) or Lesson 13 (HyDE) for advanced techniques.**
-```
+Start with Lesson 1 → then jump to Lesson 4 (MCP) or Lesson 13 (HyDE) for advanced techniques.
