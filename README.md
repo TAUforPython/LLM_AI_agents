@@ -96,22 +96,14 @@ Run a single notebook headlessly (example):
 jupyter nbconvert --to notebook --execute lesson-4_MCP_tools.ipynb --ExecutePreprocessor.timeout=600
 ```
 
-## What I reviewed (repository analysis)
-
-I inspected the README and representative notebooks (lesson-1_LLM_base_inference.ipynb and lesson-4_MCP_tools.ipynb) to confirm the examples and CLI/API usage. Lesson-4 demonstrates an explicit tool loop, tool wrapping, and integrations with LangChain / LangGraph. Lesson-1 shows Mistral and OpenAI inference examples and includes a short hallucinatory-output warning for medical usage.
-
-If you'd like, I can:
-- Add a requirements.txt with pinned versions based on notebook inline installs.
-- Add Colab badges to any notebooks that are missing them.
-- Rename files to fix small spelling inconsistencies (e.g., `MultyAgent` → `MultiAgent`) and open a PR with those changes.
 
 ## Contributing
 
 Please open an issue for major changes before submitting a PR. When adding lessons, include: problem statement, practical demo notebook, and short theory notes.
 
-## Acknowledgements
+## Prerequisites
 
-- Built with Mistral AI and LangChain examples
+- Built with Mistral AI and LangChain examples. Canonical example has GEMINI_API_TOKEN. 
 - HyDE inspired by Gao et al. (2022)
 - MCP based on Anthropic’s Model Context Protocol specification
 
